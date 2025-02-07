@@ -66,19 +66,18 @@ const StyledHambuger = styled.div`
 `;
 
 const IconClose = styled(IoCloseSharp)`
-  width: 100%;
+  width: 30px;
   height: 30px;
-  color: var(--color--green);
 `;
 
 const Icon = styled(IoMenuOutline)`
-  width: 100%;
+  width: 30px;
   height: 30px;
-  color: var(--color--green);
 `;
 
 const DropdownMenu = styled.div`
   display: none;
+
   @media (max-width: 620px) {
     display: ${({ open }) => (open ? "flex" : "none")};
     flex-direction: column;
