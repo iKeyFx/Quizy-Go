@@ -52,14 +52,15 @@ const StyledFooterDiv = styled.div`
 
   @media (max-width: 500px) {
     padding: 1rem 0;
-
+    align-items: flex-start;
     & > :first-child {
       display: none;
     }
     ul {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 0.5rem;
       font-size: 12px;
+      padding: 0;
     }
   }
 `;
@@ -72,7 +73,7 @@ const StyledIcon = styled.div`
 
   @media (max-width: 500px) {
     align-items: flex-start;
-    padding-top: 0.5rem;
+    padding: 0.5rem;
   }
 `;
 
