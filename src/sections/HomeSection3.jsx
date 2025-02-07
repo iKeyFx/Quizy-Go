@@ -1,10 +1,10 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import styled from "styled-components";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import styled from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import TestimonyImage1 from "../asset/testi-1.png";
 import TestimonyImage2 from "../asset/testi-2.png";
@@ -15,9 +15,6 @@ import LaptopMobile from "../asset/laptopImage.png";
 
 const StyledSection = styled.section``;
 const StyledUsersFeedback = styled.div`
-  /* display: flex; */
-  /* flex-direction: column;
-  align-items: center; */
   padding: 3rem 0;
 
   h2 {

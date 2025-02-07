@@ -1,13 +1,26 @@
 import styled from "styled-components";
-import LogoWhite from "./Logo-wh";
+
 import { FaFacebookF, FaRegCopyright } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+
+import LogoWhite from "./Logo-wh";
 
 const StyledFooter = styled.footer`
   background-color: var(--color-primary);
   display: grid;
   color: var(--color-gray);
   position: relative;
+
+  & > :first-child {
+    display: none;
+  }
+
+  @media (max-width: 500px) {
+    padding: 1rem;
+    & > :first-child {
+      display: grid;
+    }
+  }
 `;
 
 const StyledFooterDiv = styled.div`
@@ -38,11 +51,19 @@ const StyledFooterDiv = styled.div`
   }
 
   @media (max-width: 500px) {
-    display: flex;
-    place-items: center;
-    flex-direction: column;
+    padding: 1rem 0;
+
+    & > :first-child {
+      display: none;
+    }
+    ul {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 12px;
+    }
   }
 `;
+
 const StyledIcon = styled.div`
   display: flex;
   align-items: center;
@@ -50,7 +71,8 @@ const StyledIcon = styled.div`
   color: #1976d2;
 
   @media (max-width: 500px) {
-    gap: 8rem;
+    align-items: flex-start;
+    padding-top: 0.5rem;
   }
 `;
 
@@ -64,9 +86,11 @@ const StyledCopyRight = styled.div`
   right: 0;
   left: 0;
 `;
+
 function Footer() {
   return (
     <StyledFooter>
+      <LogoWhite />
       <StyledFooterDiv>
         <LogoWhite />
         <ul>

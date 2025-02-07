@@ -1,5 +1,5 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import styled from "styled-components";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StyledCardHead = styled.div`
   background-color: var(--color-white);

@@ -21,10 +21,6 @@ const StyledSection = styled.section`
   @media (max-width: 400px) {
     padding: 1rem 1rem;
   }
-
-  @media (max-width: 500px) {
-    font-size: 12px;
-  }
 `;
 
 const StyledMasterDiv = styled.div`
@@ -40,6 +36,9 @@ const StyledMasterDiv = styled.div`
   @media (max-width: 1020px) {
     display: grid;
     text-align: center;
+  }
+  @media (max-width: 500px) {
+    font-size: 12px;
   }
 `;
 
@@ -92,6 +91,14 @@ const StyledAboutCon = styled.div`
     font-size: 14px;
     padding: 0 1rem;
     color: var(--color-gray-text);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+
+    p {
+      font-size: 12px;
+    }
   }
 `;
 

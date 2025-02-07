@@ -1,8 +1,6 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import styled from "styled-components";
 
-import TestimonyImage1 from "../asset/testi-1.png";
-
 const StyledTCCon = styled.div`
   display: flex;
   align-items: flex-start;
