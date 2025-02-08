@@ -153,7 +153,7 @@ function HomeSection1() {
             Challenge yourself, learn new things, and track your progress with
             our engaging quizzes across various topics!
           </p>
-          <Button onClick={() => navigate("/sign-up")}>Take A Quiz</Button>
+          <Button onClick={() => navigate("/login")}>Take A Quiz</Button>
         </TextCon>
         <ImageContainer>
           <StyledCompImage src={HeroImage} alt="Quizz Screen" />
