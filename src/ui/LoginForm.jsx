@@ -88,8 +88,8 @@ function LoginForm({ loginAPi, isPending }) {
   const { errors } = formState;
   // testing2@gmail.com
   // Test@123
-  const [email] = useState("testing2@gmail.com");
-  const [password] = useState("Test@123");
+  const [email] = useState("test@test.com");
+  const [password] = useState("@Sodiq22");
   const handleClick = () => {
     setVisible((prev) => !prev);
   };
