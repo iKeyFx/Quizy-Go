@@ -1,14 +1,15 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import userAvatar from "../asset/man-tuxedo.png";
 import styled from "styled-components";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import DashBoardComponent from "../components/DashBoardComponent";
-import ArtImage from "../asset/Art.png";
-import CommercialImage from "../asset/commercial.png";
-import GeneralSubImage from "../asset/general.png";
-import ScienceSubImage from "../asset/dna.png";
-import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import SplashScreen from "../ui/SplashScreen";
+
+import ArtImage from "../asset/Art.png";
+import userAvatar from "../asset/man-tuxedo.png";
+import CommercialImage from "../asset/Commercial.png";
+import GeneralSubImage from "../asset/general.png";
+import ScienceSubImage from "../asset/dna.png";
 
 const StyledDashBoard = styled.div`
   display: flex;
