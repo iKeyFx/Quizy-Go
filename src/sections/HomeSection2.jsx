@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
+import SectionTwoComponent from "../components/SectionTwoComponent";
+
 import FreelancerImage from "../asset/freelancer.png";
 import LeanerImage from "../asset/interface-success-01-2.png";
 import MathImage from "../asset/mathematician.png";
 import CreativeImage from "../asset/work-being-creative.png";
-import SectionTwoComponent from "../components/SectionTwoComponent";
 
 const StyledSection = styled.section`
   background-color: var(--color-primary);

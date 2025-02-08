@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Logo from "../../ui/Logo";
 
 import LoginForm from "../../ui/LoginForm";
 import LoginDeskSideOne from "../../ui/LoginDeskSideOne";

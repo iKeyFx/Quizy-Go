@@ -2,6 +2,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import styled from "styled-components";
+
+import TestimonyCardComponent from "../components/TestimonyCardComponent";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -9,7 +12,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import TestimonyImage1 from "../asset/testi-1.png";
 import TestimonyImage2 from "../asset/testi-2.png";
 import TestimonyImage3 from "../asset/testi-3.png";
-import TestimonyCardComponent from "../components/TestimonyCardComponent";
 import LaptopImageH from "../asset/laptopH.png";
 import LaptopMobile from "../asset/laptopImage.png";
 

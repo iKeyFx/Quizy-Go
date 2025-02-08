@@ -7,7 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { IoCloseSharp, IoMenuOutline } from "react-icons/io5";
 import LogoWhite from "./Logo-wh";
 import NotificationIcon from "../asset/notifications_active.png";
-import ProfileImage from "../asset/avatar.png";
+import ProfileImage from "../asset/Avatar.png";
 import HelpIcon from "../asset/help.png";
 
 const StyledHeader = styled.header`
