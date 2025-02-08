@@ -26,6 +26,13 @@ const ComponentCOn = styled.div`
     font-size: 12px;
     color: var(--color-gray-text);
   }
+
+  @media (max-width: 600px) {
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
 `;
 
 const Button = styled.button`

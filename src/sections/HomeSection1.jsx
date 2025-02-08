@@ -3,6 +3,7 @@ import HeroImage from "../asset/HeroImage.png";
 import heroMobile from "../asset/heroMobile.png";
 import Quizy from "../asset/quizzy.png";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 const StyledSection = styled.section`
   display: flex;
@@ -141,6 +142,7 @@ const StyledH1 = styled.h1`
   }
 `;
 function HomeSection1() {
+  const navigate = useNavigate();
   return (
     <StyledSection>
       <StyledMasterDiv>
@@ -151,7 +153,7 @@ function HomeSection1() {
             Challenge yourself, learn new things, and track your progress with
             our engaging quizzes across various topics!
           </p>
-          <Button>Take A Quiz</Button>
+          <Button onClick={() => navigate("/sign-up")}>Take A Quiz</Button>
         </TextCon>
         <ImageContainer>
           <StyledCompImage src={HeroImage} alt="Quizz Screen" />
