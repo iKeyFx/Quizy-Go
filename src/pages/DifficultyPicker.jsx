@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { CardConDiv, StyledWelcomeDiv } from "./Dashboard";
 import DifficultyOptionsCard from "../components/DifficultyOptionsCard";
 import EasyImage from "../asset/easy.png";
-import MediumImage from "../asset/medium.png";
-import HardImage from "../asset/hard.png";
+import MediumImage from "../asset/Medium.png";
+import HardImage from "../asset/Hard.png";
 
 const StyledHeader = styled(StyledWelcomeDiv)`
   background-color: var(--color-white);
