@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import QuestionComponent from "../../QuestionComponent";
+import QuestionComponent from "../components/QuestionComponent";
 import AnswerReveiwCard from "../components/AnswerReviewComponent";
 import quizQuestions from "../data/quizTestQuestion";
 import { useLocation } from "react-router";

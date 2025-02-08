@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import QuizOption from "./src/features/quizscreen/QuizOption";
+import QuizOption from "../features/quizscreen/QuizOption";
 
 const StyledQuizOptions = styled.div`
   display: flex;

@@ -3,7 +3,7 @@ import QuizOption from "./QuizOption";
 import ProgressiveBar from "../../ui/ProgressiveBar";
 import { use, useEffect, useState } from "react";
 import Button from "../../ui/Button";
-import QuestionComponent from "../../../QuestionComponent";
+import QuestionComponent from "../../components/QuestionComponent";
 import quizQuestions from "../../data/quizTestQuestion";
 import { useNavigate } from "react-router";
 import { formatTime } from "../../util/FormatTime";
