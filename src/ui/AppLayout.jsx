@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 import { useEffect, useState } from "react";
 
-import SplashScreen from "../pages/SplashScreen";
-import GetStarted from "../pages/GetStarted";
+import GetStarted from "../features/authentication/Login";
 import Header from "./Header";
 import HomeSection1 from "../sections/HomeSection1";
 import HomeSection2 from "../sections/HomeSection2";
 import HomeSection3 from "../sections/HomeSection3";
 import Footer from "./Footer";
+import SplashScreen from "./SplashScreen";
 
 const StyledAppLayout = styled.main`
   background-color: var(--color-white);

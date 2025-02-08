@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
 import { useState } from "react";
-import { IoCloseSharp, IoMenuOutline } from "react-icons/io5";
-
-import LogoWhite from "./Logo-wh";
 import { Navigate, NavLink, useNavigate } from "react-router";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
+import { IoCloseSharp, IoMenuOutline } from "react-icons/io5";
+import LogoWhite from "./Logo-wh";
+import NotificationIcon from "../asset/notifications_active.png";
+import ProfileImage from "../asset/avatar.png";
+import HelpIcon from "../asset/help.png";
 
 const StyledHeader = styled.header`
   background-color: var(--color-primary);
   color: var(--color-white);
-  padding: 1rem 5rem;
+  padding: 1rem 4rem;
 
   @media (max-width: 1020px) {
     padding: 1rem 3rem;
@@ -24,16 +28,31 @@ const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 620px) {
+    & > :nth-child(1) {
+      order: 0;
+    }
+    & > :nth-child(2) {
+      order: 3;
+    }
+    & > :nth-child(3) {
+      order: 2;
+    }
+  }
 `;
 
 const StyledButtonDiv = styled.div`
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   cursor: pointer;
 
   @media (max-width: 620px) {
-    display: none;
+    margin: 5px 0 0 auto;
+    & > :first-child {
+      display: none;
+    }
   }
 
   a {
@@ -46,8 +65,8 @@ const StyledButtonDiv = styled.div`
   }
 `;
 
-const StyledButton = styled(NavLink)`
-  color: var(--color-primary) !important;
+const StyledButton = styled.button`
+  color: var(--color-primary);
   background-color: var(--color-white);
   font-size: 16px;
   font-weight: 500;
@@ -73,6 +92,7 @@ const StyledHambuger = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 15px;
   }
 `;
 
@@ -133,7 +153,12 @@ const StyledDeskUl = styled.ul`
     display: none;
   }
 `;
-function Header() {
+
+const Avatar = styled(LazyLoadImage)`
+  width: 30px;
+  height: 30px;
+`;
+function HeaderUser() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleOpen = () => {
@@ -146,7 +171,7 @@ function Header() {
   return (
     <StyledHeader>
       <StyledNav>
-        <LogoWhite />
+        <LogoWhite user={true} />
 
         <StyledHambuger>
           {openMenu ? (
@@ -158,36 +183,42 @@ function Header() {
 
         <StyledDeskUl>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/dashboard">Leaderboard</NavLink>
           </li>
           <li>
-            <NavLink to="/">About</NavLink>
+            <NavLink to="/dashboard">Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/">Features</NavLink>
+            <NavLink to="/dashboard">Setting</NavLink>
           </li>
         </StyledDeskUl>
 
         <StyledButtonDiv>
-          {/* <p> */}
-          <NavLink to="login">Login</NavLink>
-          {/* </p> */}
-          <StyledButton to="sign-up">Take A Quiz</StyledButton>
+          <div>
+            <Avatar src={ProfileImage} alt="Avatar" />
+          </div>
+          <div>
+            <LazyLoadImage src={NotificationIcon} alt="notification Icon" />
+          </div>
+          <div>
+            <LazyLoadImage src={HelpIcon} alt="help Icon" />
+          </div>
         </StyledButtonDiv>
       </StyledNav>
       <DropdownMenu open={openMenu}>
         <ul>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/dashboard">Leaderboard</NavLink>
           </li>
           <li>
-            <NavLink to="/">About</NavLink>
+            <NavLink to="/dashboard">Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/">Features</NavLink>
+            <NavLink to="/dashboard">Setting</NavLink>
           </li>
+
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/dashboard">Help & Support</NavLink>
           </li>
           <li>
             <StyledButton>Take A Quiz</StyledButton>
@@ -198,4 +229,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderUser;

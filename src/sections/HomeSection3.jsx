@@ -47,7 +47,8 @@ const StyledDiv2 = styled.div`
 const StyledFunCon = styled.div`
   border: 1px solid var(--color-primary);
   border-radius: 8px;
-  padding: 0 0.2rem 0.2rem;
+  /* padding: 0 0.2rem 0.2rem; */
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   h2 {

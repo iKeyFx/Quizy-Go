@@ -31,7 +31,9 @@ const GlobalStyles = createGlobalStyle`
   --color-deep-blue: #10062A;
   --color-gray-text: #c5c6d0;
   --color-secondary-4: #1B0749;
-
+  --color-easy-mode: #683ECE;
+  --color-medium-mode: #280E67;
+  --backdrop-color: rgba(0, 0, 0, 0.3);
 
     --border-radius-lg: 32px;
   
