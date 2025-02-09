@@ -13,7 +13,7 @@ function useLogin() {
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data.data.user);
       navigate("/dashboard", { replace: true });
-      // console.log(data.data.user);
+      // console.log(data);
     },
 
     onError: (error) => {

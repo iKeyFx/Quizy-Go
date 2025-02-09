@@ -10,6 +10,7 @@ import userAvatar from "../asset/man-tuxedo.png";
 import CommercialImage from "../asset/Commercial.png";
 import GeneralSubImage from "../asset/general.png";
 import ScienceSubImage from "../asset/dna.png";
+import { useMemo } from "react";
 
 const StyledDashBoard = styled.div`
   display: flex;
@@ -59,16 +60,15 @@ export const CardConDiv = styled.div`
   }
 `;
 function Dashboard() {
-  const { user, isLoading, isError } = useUser();
+  const { user, isPending, isError } = useUser();
   const { firstName, lastName } = user;
   // console.log(user);
-  if (isLoading) return <SplashScreen />;
+  if (isPending) return <SplashScreen />;
   return (
     <StyledDashBoard>
       <StyledWelcomeDiv>
         <UserAvatar src={userAvatar} alt="user avatar" />
-        <h2>{isLoading ? "Welcome" : `Welcome, ${firstName} ${lastName}`}</h2>
-        {/* <h2> Welcome</h2> */}
+        <h2>{isPending ? "Welcome" : `Welcome, ${firstName} ${lastName}`}</h2>
       </StyledWelcomeDiv>
       <CardConDiv>
         <DashBoardComponent

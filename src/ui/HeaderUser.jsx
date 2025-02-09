@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { useState } from "react";
-import { Navigate, NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import { IoCloseSharp, IoMenuOutline } from "react-icons/io5";

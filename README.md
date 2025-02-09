@@ -14,7 +14,7 @@
 
 - **Frontend**: React, Styled Components
 - **Backend**: Node.js, Express
-- **Database**: MongoDB / Firebase
+- **Database**: MongoDB
 
 ## Usage
 
