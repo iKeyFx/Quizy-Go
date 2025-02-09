@@ -22,6 +22,12 @@
 - Answer the questions within the given time limit.
 - Get your results instantly and try again to improve your score.
 
+Testing Access
+For testing and review purposes, you can access the platform using these credentials:
+
+Email: test@test.com
+Password: @Sodiq22
+
 ## Contributing
 
 Contributions are welcome! If you'd like to improve Quizy Go, follow these steps:
