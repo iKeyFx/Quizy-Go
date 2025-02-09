@@ -27,32 +27,6 @@ const QuizContainer = styled.div`
   flex-direction: column;
   gap: 1.5rem;
 `;
-const StyledQuizOptions = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-`;
-
-const QuestionDiv = styled.div`
-  color: var(--color-primary);
-  text-align: center;
-  width: 100%;
-
-  h3 {
-    font-size: 1.25rem;
-    margin: 0;
-    font-weight: 600;
-  }
-
-  @media (max-width: 500px) {
-    h3 {
-      font-size: 1rem;
-      margin: 0;
-      font-weight: 500;
-    }
-  }
-`;
 
 const QuizTitle = styled.div`
   text-align: center;
@@ -81,7 +55,7 @@ const StyleedButtonDiv = styled.div`
   }
 `;
 function QuizScreen() {
-  const [timeLeft, setTimeLeft] = useState(100);
+  const [timeLeft, setTimeLeft] = useState(1200);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [progress, setProgress] = useState(10);

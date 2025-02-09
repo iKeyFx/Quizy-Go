@@ -9,6 +9,7 @@ import HomeSection2 from "../sections/HomeSection2";
 import HomeSection3 from "../sections/HomeSection3";
 import Footer from "./Footer";
 import SplashScreen from "./SplashScreen";
+import { Outlet } from "react-router";
 
 const StyledAppLayout = styled.main`
   background-color: var(--color-white);
@@ -32,9 +33,7 @@ function AppLayout() {
         <>
           <Header />
           <main>
-            <HomeSection1 />
-            <HomeSection2 />
-            <HomeSection3 />
+            <Outlet />
           </main>
           <Footer />
         </>

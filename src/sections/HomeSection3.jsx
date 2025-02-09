@@ -14,6 +14,7 @@ import TestimonyImage2 from "../asset/testi-2.png";
 import TestimonyImage3 from "../asset/testi-3.png";
 import LaptopImageH from "../asset/laptopH.png";
 import LaptopMobile from "../asset/laptopImage.png";
+import { useNavigate } from "react-router";
 
 const StyledSection = styled.section``;
 const StyledUsersFeedback = styled.div`
@@ -58,7 +59,7 @@ const StyledFunCon = styled.div`
     margin-top: 0;
   }
   p {
-    color: var(--color-gray-text);
+    color: var(--color-secondary-2);
     font-size: 12px;
   }
 `;
@@ -98,6 +99,7 @@ const StyledImageMobile = styled(LazyLoadImage)`
   }
 `;
 function HomeSection3() {
+  const navigate = useNavigate();
   return (
     <StyledSection>
       <StyledUsersFeedback>
@@ -169,7 +171,9 @@ function HomeSection3() {
             <h2>Fun, Fast, and Free!</h2>
             <p>One challenge a day, keeps the doctor away!</p>
           </div>
-          <Button>Start playing today</Button>
+          <Button onClick={() => navigate("/sign-up")}>
+            Start playing today
+          </Button>
         </StyledFunCon>
       </StyledDiv2>
     </StyledSection>

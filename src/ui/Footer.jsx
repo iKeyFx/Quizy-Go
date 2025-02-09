@@ -32,7 +32,7 @@ const StyledFooterDiv = styled.div`
     list-style: none;
     display: flex;
     gap: 2rem;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   li {
@@ -46,7 +46,7 @@ const StyledFooterDiv = styled.div`
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 0.5rem;
-      font-size: 12px;
+      font-size: 14px;
     }
   }
 
@@ -59,7 +59,7 @@ const StyledFooterDiv = styled.div`
     ul {
       grid-template-columns: repeat(2, 1fr);
       gap: 0.5rem;
-      font-size: 12px;
+      font-size: 14px;
       padding: 0;
     }
   }
@@ -81,7 +81,7 @@ const StyledCopyRight = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10px;
+  font-size: 16px;
   position: absolute;
   bottom: 2%;
   right: 0;

@@ -36,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
   --backdrop-color: rgba(0, 0, 0, 0.3);
 
     --border-radius-lg: 32px;
-  
+    /* c5c6d0 */
   }
 
   body {

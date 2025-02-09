@@ -46,7 +46,7 @@ const StyledButtonDiv = styled.div`
   }
 `;
 
-const StyledButton = styled(NavLink)`
+const StyledButton = styled.button`
   color: var(--color-primary) !important;
   background-color: var(--color-white);
   font-size: 16px;
@@ -61,8 +61,8 @@ const StyledButton = styled(NavLink)`
   }
 
   @media (max-width: 1020px) {
-    padding: 8px 18px;
     font-size: 10px;
+    padding: 8px 18px;
   }
 `;
 
@@ -135,7 +135,7 @@ const StyledDeskUl = styled.ul`
 `;
 function Header() {
   const [openMenu, setOpenMenu] = useState(false);
-
+  const navigate = useNavigate();
   const handleOpen = () => {
     setOpenMenu(true);
   };
@@ -161,10 +161,10 @@ function Header() {
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/">About</NavLink>
+            <NavLink to="/home/about">About</NavLink>
           </li>
           <li>
-            <NavLink to="/">Features</NavLink>
+            <NavLink to="/home/features">Features</NavLink>
           </li>
         </StyledDeskUl>
 
@@ -172,7 +172,9 @@ function Header() {
           {/* <p> */}
           <NavLink to="login">Login</NavLink>
           {/* </p> */}
-          <StyledButton to="sign-up">Take A Quiz</StyledButton>
+          <StyledButton onClick={() => navigate("/sign-up")}>
+            Take A Quiz
+          </StyledButton>
         </StyledButtonDiv>
       </StyledNav>
       <DropdownMenu open={openMenu}>

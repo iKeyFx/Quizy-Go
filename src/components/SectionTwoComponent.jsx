@@ -20,7 +20,7 @@ const StyledCardText = styled.div`
   p {
     font-size: 14px;
     color: var(--color-primary-2);
-    color: var(--color-gray-text);
+    color: var(--color-secondary-2);
     font-weight: 400;
     margin: 0;
   }

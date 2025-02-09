@@ -15,6 +15,9 @@ import ScoreDisplay from "./ui/ScoreDisplay";
 import AnswerReview from "./pages/AnswerReview";
 import ProtectedRoute from "./ui/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
+import About from "./ui/About";
+import Home from "./ui/Home";
+import FeaturesPage from "./ui/FeaturesPage";
 
 function App() {
   const queryClient = new QueryClient({
@@ -37,6 +40,9 @@ function App() {
           <Routes>
             <Route element={<AppLayout />}>
               <Route index element={<Navigate replace to="home" />} />
+              <Route path="home" element={<Home />} />
+              <Route path="home/about" element={<About />} />
+              <Route path="home/features" element={<FeaturesPage />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="sign-up" element={<SignUp />} />

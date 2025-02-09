@@ -53,7 +53,7 @@ const TextCon = styled.div`
 
   p {
     font-size: 14px;
-    color: var(--color-gray-text);
+    color: var(--color-secondary-2);
   }
 
   @media (max-width: 1020px) {
@@ -91,7 +91,7 @@ const StyledAboutCon = styled.div`
     margin-top: 10px;
     font-size: 14px;
     padding: 0 1rem;
-    color: var(--color-gray-text);
+    color: var(--color-secondary-2);
   }
 
   @media (max-width: 768px) {
