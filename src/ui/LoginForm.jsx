@@ -86,10 +86,6 @@ function LoginForm({ loginAPi, isPending }) {
   const [visible, setVisible] = useState(false);
   const { register, formState, handleSubmit, reset } = useForm();
   const { errors } = formState;
-  // testing2@gmail.com
-  // Test@123
-  const [email] = useState("test@test.com");
-  const [password] = useState("@Sodiq22");
   const handleClick = () => {
     setVisible((prev) => !prev);
   };
@@ -115,7 +111,6 @@ function LoginForm({ loginAPi, isPending }) {
           type="text"
           id="email"
           name="email"
-          value={email}
           disabled={isPending}
           {...register("email", {
             required: "This field is required",
@@ -132,7 +127,6 @@ function LoginForm({ loginAPi, isPending }) {
           <StyledInput
             type={visible ? "text" : "password"}
             id="password"
-            value={password}
             disabled={isPending}
             {...register("password", {
               required: "This field is required",
