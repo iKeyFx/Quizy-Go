@@ -57,13 +57,13 @@ const StyledImage = styled(LazyLoadImage)`
   }
 `;
 
-function DashBoardComponent({ image, text, title, borderColor }) {
+function DashBoardComponent({ image, text, category, borderColor }) {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handClick = () => {
-    navigate(`/dashboard/${title}/quiz-mode`);
+    navigate(`/dashboard/${category}`);
   };
   return (
     <ComponentCOn
@@ -72,7 +72,7 @@ function DashBoardComponent({ image, text, title, borderColor }) {
       onMouseLeave={() => setVisible(false)}
     >
       {image && <StyledImage src={image} alt="image" />}
-      <h3>{title}</h3>
+      <h3>{category}</h3>
       <p>{text}</p>
       <Button visible={visible} onClick={handClick}>
         Take Quiz

@@ -5,14 +5,6 @@ import { useNavigate } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import SplashScreen from "./SplashScreen";
 
-const FullPage = styled.div`
-  height: 100vh;
-  background-color: var(--color-light-grey);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 function ProtectedRoute({ children }) {
   const { user, isPending } = useUser();
   const navigate = useNavigate();
@@ -20,7 +12,7 @@ function ProtectedRoute({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogout = () => {
-    // localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
     queryClient.clear();
     navigate("/login", { replace: true });
   };
@@ -36,7 +28,7 @@ function ProtectedRoute({ children }) {
     }
 
     const onStorageChange = (event) => {
-      if (event.key === "authToken" && !event.newValue) {
+      if (event.key === "user" && !event.newValue) {
         handleLogout();
       }
     };

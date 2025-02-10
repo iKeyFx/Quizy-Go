@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import { IoCloseSharp, IoShareSocialOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { StyledButton } from "./ResultButton";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 const Overlay = styled.div`
   /* background-color: rgba(0, 0, 0, 0.5);
@@ -126,6 +126,7 @@ const StyledShareButton = styled.button`
 function ScoreDisplay() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { category } = useParams();
   const { correctAnswers, incorrectAnswers, results } = location.state || {};
 
   if (!location.state) {
@@ -139,7 +140,7 @@ function ScoreDisplay() {
           <IoCloseSharp onClick={() => navigate("/dashboard")} />
         </Button>
         <StyledH3>Congratulations</StyledH3>
-        <StyledCategorySpan>Categoty: Science</StyledCategorySpan>
+        <StyledCategorySpan>Categoty: {category}</StyledCategorySpan>
         <StyledAnswerDiv>
           <p>You answered</p>
           <span>

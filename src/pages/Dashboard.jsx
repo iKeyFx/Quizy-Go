@@ -11,6 +11,7 @@ import CommercialImage from "../asset/Commercial.png";
 import GeneralSubImage from "../asset/general.png";
 import ScienceSubImage from "../asset/dna.png";
 import { useMemo } from "react";
+import { useNavigate } from "react-router";
 
 const StyledDashBoard = styled.div`
   display: flex;
@@ -64,6 +65,8 @@ function Dashboard() {
   const { firstName, lastName } = user;
   // console.log(user);
   if (isPending) return <SplashScreen />;
+  // if (isError) return <PageNotFound />;
+
   return (
     <StyledDashBoard>
       <StyledWelcomeDiv>
@@ -72,25 +75,25 @@ function Dashboard() {
       </StyledWelcomeDiv>
       <CardConDiv>
         <DashBoardComponent
-          title="Arts"
+          category="Arts"
           text="Explore quizzes on Art history, Famous painter and creative movement"
           image={ArtImage}
           borderColor="var(--color-primary)"
         />
         <DashBoardComponent
-          title="Science"
+          category="Science"
           text="Challenge your knowledge in physics, chemistry, biology, and more"
           image={ScienceSubImage}
           borderColor="var(--color-secondary-1)"
         />
         <DashBoardComponent
-          title="Commercial"
+          category="Commercial"
           text="Test your skills in business, economics, finance, and marketing"
           image={CommercialImage}
           borderColor="var(--color-green)"
         />
         <DashBoardComponent
-          title="General Studies"
+          category="General Studies"
           text="Dive into global politics, international relations, and world events"
           image={GeneralSubImage}
           borderColor="var(--color-link)"

@@ -11,6 +11,9 @@ function useLogin() {
     mutationFn: ({ email, password }) => login({ email, password }),
 
     onSuccess: (data) => {
+      localStorage.setItem("user", JSON.stringify(data.data.user));
+      // localStorage.setItem("user", JSON.stringify(data.data.user._id));
+
       queryClient.setQueryData(["user"], data.data.user);
       navigate("/dashboard", { replace: true });
       // console.log(data);

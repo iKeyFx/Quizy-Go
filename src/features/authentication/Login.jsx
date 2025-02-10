@@ -5,6 +5,9 @@ import LoginDeskSideOne from "../../ui/LoginDeskSideOne";
 import LoginToSignUp from "../../ui/LoginToSignUp";
 import useLogin from "./useLogin";
 import SplashScreen from "../../ui/SplashScreen";
+import { BiArrowBack } from "react-icons/bi";
+import { useMoveBack } from "../../hooks/useMoveBack";
+import { useNavigate } from "react-router";
 
 export const StyledLogin = styled.div`
   display: flex;
@@ -15,6 +18,7 @@ export const StyledLogin = styled.div`
 `;
 
 export const StyledLoginDiv2 = styled.div`
+  position: relative;
   flex: 1;
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -66,16 +70,29 @@ export const StyledTextCon = styled.div`
     }
   }
 `;
+export const StyledArrowBack = styled.div`
+  position: absolute;
+  top: 4%;
+  left: 4%;
+  cursor: pointer;
+`;
 
+export const ArrowBack = styled(BiArrowBack)`
+  width: 30px;
+  height: 30px;
+`;
 function Login() {
   const { loginAPi, isPending } = useLogin();
-
+  const navigate = useNavigate();
   if (isPending) return <SplashScreen />;
   return (
     <StyledLogin>
       <LoginDeskSideOne />
 
       <StyledLoginDiv2>
+        <StyledArrowBack onClick={() => navigate("/")}>
+          <ArrowBack />
+        </StyledArrowBack>
         <StyledTextCon>
           <h3>Welcome to quizzy</h3>
           <span>Log in</span>

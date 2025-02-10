@@ -9,6 +9,8 @@ import LogoWhite from "./Logo-wh";
 import NotificationIcon from "../asset/notifications_active.png";
 import ProfileImage from "../asset/Avatar.png";
 import HelpIcon from "../asset/help.png";
+import { IoIosLogOut } from "react-icons/io";
+import useLogout from "../features/authentication/useLogout";
 
 const StyledHeader = styled.header`
   background-color: var(--color-primary);
@@ -158,9 +160,32 @@ const Avatar = styled(LazyLoadImage)`
   width: 30px;
   height: 30px;
 `;
+const LogoutIcon = styled(IoIosLogOut)`
+  width: 20px;
+  height: 20px;
+
+  &:hover {
+    color: var(--color-gray-text);
+  }
+
+  @media (max-width: 620px) {
+    display: none;
+  }
+`;
+const LogoutDiv = styled.div`
+  @media (max-width: 620px) {
+    display: none;
+  }
+`;
+const NotificationBellDiv = styled.div`
+  display: none;
+  @media (max-width: 620px) {
+    display: block;
+  }
+`;
 function HeaderUser() {
   const [openMenu, setOpenMenu] = useState(false);
-
+  const logout = useLogout();
   const handleOpen = () => {
     setOpenMenu(true);
   };
@@ -197,12 +222,15 @@ function HeaderUser() {
           <div>
             <Avatar src={ProfileImage} alt="Avatar" />
           </div>
-          <div>
+          <NotificationBellDiv>
             <LazyLoadImage src={NotificationIcon} alt="notification Icon" />
-          </div>
+          </NotificationBellDiv>
           <div>
             <LazyLoadImage src={HelpIcon} alt="help Icon" />
           </div>
+          <LogoutDiv>
+            <LogoutIcon onClick={logout} />
+          </LogoutDiv>
         </StyledButtonDiv>
       </StyledNav>
       <DropdownMenu open={openMenu}>
@@ -221,7 +249,7 @@ function HeaderUser() {
             <NavLink to="/dashboard">Help & Support</NavLink>
           </li>
           <li>
-            <StyledButton>Take A Quiz</StyledButton>
+            <StyledButton>Log Out</StyledButton>
           </li>
         </ul>
       </DropdownMenu>

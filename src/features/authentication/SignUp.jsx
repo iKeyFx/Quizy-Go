@@ -2,16 +2,27 @@ import LoginDeskSideOne from "../../ui/LoginDeskSideOne";
 import LoginForm from "../../ui/LoginForm";
 import LoginToSignUp from "../../ui/LoginToSignUp";
 import SignUpForm from "./SignUpForm";
-import { StyledLogin, StyledLoginDiv2, StyledTextCon } from "./Login";
+import {
+  ArrowBack,
+  StyledArrowBack,
+  StyledLogin,
+  StyledLoginDiv2,
+  StyledTextCon,
+} from "./Login";
 import useSignup from "./useSignup";
+import { useMoveBack } from "../../hooks/useMoveBack";
 
 function SignUp() {
   const { userSignUp, isError, isPending } = useSignup();
+  const moveBack = useMoveBack();
   return (
     <StyledLogin>
       <LoginDeskSideOne />
 
       <StyledLoginDiv2>
+        <StyledArrowBack onClick={moveBack}>
+          <ArrowBack />
+        </StyledArrowBack>
         <StyledTextCon>
           <h3>Welcome to quizzy</h3>
           <span>Create an Account</span>

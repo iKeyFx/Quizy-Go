@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import styled from "styled-components";
 
 const ComponentCOn = styled.div`
@@ -51,20 +51,27 @@ const StyledImage = styled(LazyLoadImage)`
   }
 `;
 
-function DifficultyOptionsCard({ image, text, title, bgColor }) {
+function DifficultyOptionsCard({ image, text, difficulty, bgColor }) {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
-
+  const { category } = useParams();
+  const handleDifficultySelect = (difficulty) => {
+    console.log(difficulty);
+    navigate(`/quiz/${category}/${difficulty}`);
+  };
   return (
     <ComponentCOn
       bgColor={bgColor}
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >
-      <h3>{title}</h3>
+      <h3>{difficulty}</h3>
       <StyledImage src={image} alt="image" />
       <p>{text}</p>
-      <Button visible={visible} onClick={() => navigate("/quiz")}>
+      <Button
+        visible={visible}
+        onClick={() => handleDifficultySelect(difficulty)}
+      >
         Start Quiz
       </Button>
     </ComponentCOn>

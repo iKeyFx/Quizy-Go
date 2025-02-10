@@ -57,9 +57,7 @@ const AnswerContainer = styled.div`
 `;
 function AnswerReview() {
   const location = useLocation();
-  const { results } = location.state || {};
-  console.log(results);
-
+  const { results, filteredQuestions } = location.state || {};
   return (
     <Container>
       <ReviewContainer>
@@ -70,7 +68,7 @@ function AnswerReview() {
           </div>
 
           <div>
-            {quizQuestions.map((question, index) => {
+            {filteredQuestions?.map((question, index) => {
               const userAnswer = results[index]?.userAnswer;
               return (
                 <ResultDiv key={index}>

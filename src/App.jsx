@@ -57,16 +57,22 @@ function App() {
             >
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route
+              {/* <Route
                 path="dashboard/subcategory/:d"
                 element={<SelectSubCategory />}
-              />
+              /> */}
               <Route
-                path="dashboard/:d/quiz-mode"
+                path="dashboard/:category"
                 element={<DifficultyPicker />}
               />
-              <Route path="quiz" element={<QuizScreen />} />
-              <Route path="quiz/result" element={<ScoreDisplay />} />
+              <Route
+                path="quiz/:category/:difficulty"
+                element={<QuizScreen />}
+              />
+              <Route
+                path="quiz/:category/:difficulty/result"
+                element={<ScoreDisplay />}
+              />
               <Route path="quiz/answer-review" element={<AnswerReview />} />
             </Route>
           </Routes>

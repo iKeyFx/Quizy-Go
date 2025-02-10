@@ -7,8 +7,14 @@ export function useUser() {
     isError,
   } = useQuery({
     queryKey: ["user"],
+
+    initialData: () => {
+      // Get user data from localStorage
+      const userData = localStorage.getItem("user");
+      return userData ? JSON.parse(userData) : null;
+    },
   });
 
-  // console.log(user);
+  // console.log(user._id);
   return { user, isPending, isError };
 }

@@ -35,13 +35,15 @@ const ProgressText = styled.span`
     font-size: 12px;
   }
 `;
-function ProgressiveBar({ progress }) {
+function ProgressiveBar({ progress, currentQuestionIndex, filteredQuestions }) {
   return (
     <Container>
       <ProgressBarContainer>
         <ProgressBarFill style={{ width: `${progress}%` }} />
       </ProgressBarContainer>
-      <ProgressText>{progress / 10}/10</ProgressText>
+      <ProgressText>
+        {currentQuestionIndex + 1}/{filteredQuestions.length}
+      </ProgressText>
     </Container>
   );
 }

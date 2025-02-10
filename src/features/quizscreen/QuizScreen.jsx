@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import QuizOption from "./QuizOption";
 import ProgressiveBar from "../../ui/ProgressiveBar";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../ui/Button";
 import QuestionComponent from "../../components/QuestionComponent";
 import quizQuestions from "../../data/quizTestQuestion";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { formatTime } from "../../util/FormatTime";
 
 const StyledQuizScreen = styled.div`
@@ -55,12 +54,36 @@ const StyleedButtonDiv = styled.div`
   }
 `;
 function QuizScreen() {
-  const [timeLeft, setTimeLeft] = useState(1200);
+  const { category, difficulty } = useParams();
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const savedTime = localStorage.getItem("quizTimeLeft");
+    return savedTime ? parseInt(savedTime, 10) : 600;
+  });
+
+  const [selectedOptions, setSelectedOptions] = useState(() => {
+    const savedAnswers = localStorage.getItem("quizAnswers");
+    return savedAnswers ? JSON.parse(savedAnswers) : {};
+  });
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [progress, setProgress] = useState(10);
-  const questions = quizQuestions;
+
   const navigate = useNavigate();
+
+  const filteredQuestions = quizQuestions.filter(
+    (question) =>
+      question.category === category && question.difficulty === difficulty
+  );
+
+  const progress =
+    ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
+
+  useEffect(() => {
+    localStorage.setItem("quizTimeLeft", timeLeft);
+  }, [timeLeft]);
+
+  useEffect(() => {
+    localStorage.setItem("quizAnswers", JSON.stringify(selectedOptions));
+  }, [selectedOptions]);
 
   useEffect(() => {
     if (timeLeft === 0) {
@@ -80,7 +103,7 @@ function QuizScreen() {
     let incorrectAnswers = 0;
     const results = [];
 
-    questions.forEach((question, index) => {
+    filteredQuestions.forEach((question, index) => {
       const selectedAnswer = selectedOptions[index];
       const correctAnswer = question.correctOption;
 
@@ -98,24 +121,26 @@ function QuizScreen() {
       }
     });
 
-    navigate("/quiz/result", {
+    localStorage.removeItem("quizTimeLeft");
+    localStorage.removeItem("quizAnswers");
+
+    navigate(`/quiz/${category}/${difficulty}/result`, {
       state: {
         correctAnswers,
         incorrectAnswers,
         results,
+        filteredQuestions,
       },
     });
   };
   const handleNext = () => {
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setProgress((prevProgress) => prevProgress + 100 / questions.length);
     }
   };
   const handlePrev = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
-      setProgress((prevProgress) => prevProgress - 100 / questions.length);
     }
   };
 
@@ -133,18 +158,18 @@ function QuizScreen() {
           <span>00:{formatTime(timeLeft)}</span>
         </QuizTitle>
         <QuestionComponent
-          question={questions[currentQuestionIndex].question}
-          options={questions[currentQuestionIndex].options}
+          question={filteredQuestions[currentQuestionIndex].question}
+          options={filteredQuestions[currentQuestionIndex].options}
           onOptionClick={handleOptionClick}
           selectedOption={selectedOptions[currentQuestionIndex]}
         />
         <StyleedButtonDiv>
-          {progress > 10 && progress <= 100 && (
+          {currentQuestionIndex > 0 && (
             <Button sizes="large" variations="prev" onClick={handlePrev}>
               Previous
             </Button>
           )}
-          {progress >= 10 && progress < 100 && (
+          {currentQuestionIndex < filteredQuestions.length - 1 && (
             <Button
               sizes="large"
               variations="next"
@@ -154,7 +179,7 @@ function QuizScreen() {
               Next
             </Button>
           )}
-          {progress === 100 && (
+          {currentQuestionIndex === filteredQuestions.length - 1 && (
             <Button
               sizes="large"
               variations="submit"
@@ -166,7 +191,11 @@ function QuizScreen() {
           )}
         </StyleedButtonDiv>
 
-        <ProgressiveBar progress={progress} />
+        <ProgressiveBar
+          currentQuestionIndex={currentQuestionIndex}
+          filteredQuestions={filteredQuestions}
+          progress={progress}
+        />
       </QuizContainer>
     </StyledQuizScreen>
   );

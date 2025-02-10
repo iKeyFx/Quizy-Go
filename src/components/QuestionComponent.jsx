@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import QuizOption from "../features/quizscreen/QuizOption";
+import PageNotFound from "../pages/PageNotFound";
 
 const StyledQuizOptions = styled.div`
   display: flex;

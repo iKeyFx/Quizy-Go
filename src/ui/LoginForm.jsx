@@ -86,6 +86,7 @@ function LoginForm({ loginAPi, isPending }) {
   const [visible, setVisible] = useState(false);
   const { register, formState, handleSubmit, reset } = useForm();
   const { errors } = formState;
+
   const handleClick = () => {
     setVisible((prev) => !prev);
   };
