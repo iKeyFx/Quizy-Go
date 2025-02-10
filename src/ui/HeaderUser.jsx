@@ -249,7 +249,7 @@ function HeaderUser() {
             <NavLink to="/dashboard">Help & Support</NavLink>
           </li>
           <li>
-            <StyledButton>Log Out</StyledButton>
+            <StyledButton onClick={logout}>Log Out</StyledButton>
           </li>
         </ul>
       </DropdownMenu>
