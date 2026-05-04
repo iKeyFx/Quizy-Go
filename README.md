@@ -26,7 +26,7 @@ Testing Access
 For testing and review purposes, you can access the platform using these credentials:
 
 Email: test@test.com
-Password: @Sodiq22
+Password: @!12345678Ba
 
 ## Contributing
 
