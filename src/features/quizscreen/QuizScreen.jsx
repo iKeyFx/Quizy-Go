@@ -3,9 +3,10 @@ import ProgressiveBar from "../../ui/ProgressiveBar";
 import { useEffect, useState } from "react";
 import Button from "../../ui/Button";
 import QuestionComponent from "../../components/QuestionComponent";
-import quizQuestions from "../../data/quizTestQuestion";
+import { useQuizQuestions } from "./useQuizQuestions";
 import { useNavigate, useParams } from "react-router";
 import { formatTime } from "../../util/FormatTime";
+import SplashScreen from "../../ui/SplashScreen";
 
 const StyledQuizScreen = styled.div`
   display: flex;
@@ -69,13 +70,11 @@ function QuizScreen() {
 
   const navigate = useNavigate();
 
-  const filteredQuestions = quizQuestions.filter(
-    (question) =>
-      question.category === category && question.difficulty === difficulty
-  );
-
-  const progress =
-    ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
+  const {
+    data: filteredQuestions = [],
+    isPending: isLoadingQuestions,
+    isError,
+  } = useQuizQuestions({ category, difficulty });
 
   useEffect(() => {
     localStorage.setItem("quizTimeLeft", timeLeft);
@@ -150,6 +149,11 @@ function QuizScreen() {
       [currentQuestionIndex]: option,
     }));
   };
+  if (isLoadingQuestions) return <SplashScreen />;
+  if (isError) return <p>Failed to load questions. Please try again.</p>;
+
+  const progress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
+
   return (
     <StyledQuizScreen>
       <QuizContainer>

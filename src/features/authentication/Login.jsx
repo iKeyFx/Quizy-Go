@@ -4,7 +4,6 @@ import LoginForm from "../../ui/LoginForm";
 import LoginDeskSideOne from "../../ui/LoginDeskSideOne";
 import LoginToSignUp from "../../ui/LoginToSignUp";
 import useLogin from "./useLogin";
-import SplashScreen from "../../ui/SplashScreen";
 import { BiArrowBack } from "react-icons/bi";
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useNavigate } from "react-router";
@@ -84,7 +83,6 @@ export const ArrowBack = styled(BiArrowBack)`
 function Login() {
   const { loginAPi, isPending } = useLogin();
   const navigate = useNavigate();
-  if (isPending) return <SplashScreen />;
   return (
     <StyledLogin>
       <LoginDeskSideOne />

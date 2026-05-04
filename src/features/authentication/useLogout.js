@@ -7,7 +7,11 @@ function useLogout() {
   const queryClient = useQueryClient();
 
   const logout = async () => {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Sign out failed:", error.message);
+      return;
+    }
     localStorage.removeItem("user");
     queryClient.removeQueries(["user"]);
     navigate("/login", { replace: true });

@@ -4,7 +4,6 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
 import useLogin from "../features/authentication/useLogin";
 import SpinnerMini from "./SpinnerMini";
-import SplashScreen from "./SplashScreen";
 
 const StyledForm = styled.form`
   width: 80%;
