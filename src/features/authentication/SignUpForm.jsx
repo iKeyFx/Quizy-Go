@@ -91,7 +91,7 @@ function SignUpForm({ userSignUp, isError, isPending }) {
   };
 
   const handleSignUp = ({ email, password, fname, lname, confirmPassword }) => {
-    console.log(email, password, fname, lname, confirmPassword);
+    // console.log(email, password, fname, lname, confirmPassword);
     userSignUp({ email, password, fname, lname, confirmPassword });
     // reset();
   };
