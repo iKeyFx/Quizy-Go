@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { NavLink } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
@@ -183,8 +184,97 @@ const NotificationBellDiv = styled.div`
     display: block;
   }
 `;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--backdrop-color);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+`;
+
+const ModalCard = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 1001;
+  min-width: 300px;
+
+  @media (max-width: 500px) {
+    padding: 2rem 1.5rem;
+    min-width: 260px;
+  }
+`;
+
+const ModalTitle = styled.h3`
+  font-size: 1.2rem;
+  color: var(--color-secondary-4);
+  margin: 0;
+  text-align: center;
+`;
+
+const ModalText = styled.p`
+  font-size: 0.9rem;
+  color: var(--color-gray-text);
+  margin: 0;
+  text-align: center;
+`;
+
+const ModalButtons = styled.div`
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+`;
+
+const CancelButton = styled.button`
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-gray-text);
+  background: none;
+  color: var(--color-secondary-4);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-gray);
+    transition: all 0.2s;
+  }
+`;
+
+const ConfirmButton = styled.button`
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-primary-2);
+    transition: all 0.2s;
+  }
+`;
+
 function HeaderUser() {
   const [openMenu, setOpenMenu] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const logout = useLogout();
   const handleOpen = () => {
     setOpenMenu(true);
@@ -192,8 +282,17 @@ function HeaderUser() {
   const handleClose = () => {
     setOpenMenu(false);
   };
+  const handleLogoutClick = () => {
+    setOpenMenu(false);
+    setShowLogoutModal(true);
+  };
+  const handleConfirmLogout = () => {
+    setShowLogoutModal(false);
+    logout();
+  };
 
   return (
+    <>
     <StyledHeader>
       <StyledNav>
         <LogoWhite user={true} />
@@ -229,7 +328,7 @@ function HeaderUser() {
             <LazyLoadImage src={HelpIcon} alt="help Icon" />
           </div>
           <LogoutDiv>
-            <LogoutIcon onClick={logout} />
+            <LogoutIcon onClick={handleLogoutClick} />
           </LogoutDiv>
         </StyledButtonDiv>
       </StyledNav>
@@ -249,11 +348,31 @@ function HeaderUser() {
             <NavLink to="/dashboard">Help & Support</NavLink>
           </li>
           <li>
-            <StyledButton onClick={logout}>Log Out</StyledButton>
+            <StyledButton onClick={handleLogoutClick}>Log Out</StyledButton>
           </li>
         </ul>
       </DropdownMenu>
     </StyledHeader>
+
+    {showLogoutModal &&
+      createPortal(
+        <ModalOverlay onClick={() => setShowLogoutModal(false)}>
+          <ModalCard onClick={(e) => e.stopPropagation()}>
+            <ModalTitle>Log Out</ModalTitle>
+            <ModalText>Are you sure you want to log out?</ModalText>
+            <ModalButtons>
+              <CancelButton onClick={() => setShowLogoutModal(false)}>
+                Cancel
+              </CancelButton>
+              <ConfirmButton onClick={handleConfirmLogout}>
+                Log Out
+              </ConfirmButton>
+            </ModalButtons>
+          </ModalCard>
+        </ModalOverlay>,
+        document.body
+      )}
+    </>
   );
 }
 

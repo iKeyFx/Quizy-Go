@@ -1,63 +1,29 @@
-export async function login({ email, password }) {
-  try {
-    const res = await fetch(
-      `https://quiz-api-23gk.onrender.com/auth/login`,
+import { supabase } from "./supabase";
 
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error(`Request failed with status: ${res.status}`);
-    }
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error during login:", error.message);
-    throw new Error("Failed to login");
-  }
+function normalizeUser(supabaseUser) {
+  return {
+    _id: supabaseUser.id,
+    email: supabaseUser.email,
+    firstName: supabaseUser.user_metadata?.firstName ?? "",
+    lastName: supabaseUser.user_metadata?.lastName ?? "",
+  };
 }
 
-export async function signUp({
-  email,
-  password,
-  fname,
-  lname,
-  confirmPassword,
-}) {
-  try {
-    const res = await fetch(`https://quiz-api-23gk.onrender.com/auth/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        firstName: fname,
-        lastName: lname,
-        password: password,
-        passwordRepeat: confirmPassword,
-        role: "user",
-      }),
-    });
+export async function login({ email, password }) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  if (error) throw new Error(error.message);
+  return { data: { user: normalizeUser(data.user) } };
+}
 
-    if (!res.ok) {
-      throw new Error(`Request failed with status: ${res.status}`);
-    }
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error during SignUp:", error.message);
-    throw new Error("Failed to SignUp");
-  }
+export async function signUp({ email, password, fname, lname }) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: { data: { firstName: fname, lastName: lname } },
+  });
+  if (error) throw new Error(error.message);
+  return data;
 }
