@@ -64,9 +64,9 @@ function Dashboard() {
   const { user, isPending, isError } = useUser();
 
   if (isPending) return <SplashScreen />;
+  if (isError || !user) return <p>Failed to load user data.</p>;
 
   const { firstName, lastName } = user;
-  // if (isError) return <PageNotFound />;
 
   return (
     <StyledDashBoard>

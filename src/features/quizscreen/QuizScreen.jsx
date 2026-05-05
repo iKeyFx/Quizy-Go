@@ -73,7 +73,10 @@ function QuizScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!VALID_CATEGORIES.includes(category) || !VALID_DIFFICULTIES.includes(difficulty)) return;
+    if (!VALID_CATEGORIES.includes(category) || !VALID_DIFFICULTIES.includes(difficulty)) {
+      localStorage.removeItem("activeQuizUrl");
+      return;
+    }
     localStorage.setItem("activeQuizUrl", window.location.pathname);
     window.history.pushState(null, "", window.location.href);
 
@@ -94,7 +97,7 @@ function QuizScreen() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
       localStorage.removeItem("activeQuizUrl");
     };
-  }, []);
+  }, [category, difficulty]);
 
   const {
     data: filteredQuestions = [],
@@ -180,8 +183,10 @@ function QuizScreen() {
       [currentQuestionIndex]: option,
     }));
   };
-  if (!VALID_CATEGORIES.includes(category) || !VALID_DIFFICULTIES.includes(difficulty))
+  if (!VALID_CATEGORIES.includes(category) || !VALID_DIFFICULTIES.includes(difficulty)) {
+    localStorage.removeItem("activeQuizUrl");
     return <Navigate to="/dashboard" replace />;
+  }
   if (isLoadingQuestions) return <SplashScreen />;
   if (isError) return <p>Failed to load questions. Please try again.</p>;
 
