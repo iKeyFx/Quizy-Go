@@ -33,6 +33,7 @@ const StyledMain = styled.main`
 `;
 
 function PageNotFound() {
+  const location = useLocation();
   const activeQuizUrl = localStorage.getItem("activeQuizUrl");
   if (activeQuizUrl) {
     const match = activeQuizUrl.match(/^\/quiz\/([^/]+)\/([^/]+)$/);

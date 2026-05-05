@@ -67,7 +67,6 @@ function Dashboard() {
   if (!user) return <SplashScreen />;
 
   const { firstName, lastName } = user;
-  // if (isError) return <PageNotFound />;
 
   return (
     <StyledDashBoard>
