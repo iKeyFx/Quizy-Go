@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import Button from "../../ui/Button";
 import QuestionComponent from "../../components/QuestionComponent";
 import { useQuizQuestions } from "./useQuizQuestions";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
+import toast from "react-hot-toast";
 import { formatTime } from "../../util/FormatTime";
 import SplashScreen from "../../ui/SplashScreen";
+import { VALID_CATEGORIES, VALID_DIFFICULTIES } from "../../data/constants";
 
 const StyledQuizScreen = styled.div`
   display: flex;
@@ -70,11 +72,42 @@ function QuizScreen() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!VALID_CATEGORIES.includes(category) || !VALID_DIFFICULTIES.includes(difficulty)) {
+      localStorage.removeItem("activeQuizUrl");
+      return;
+    }
+    localStorage.setItem("activeQuizUrl", window.location.pathname);
+    window.history.pushState(null, "", window.location.href);
+
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href);
+      toast.error("Please complete or submit the quiz before leaving.");
+    };
+
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      localStorage.removeItem("activeQuizUrl");
+    };
+  }, [category, difficulty]);
+
   const {
     data: filteredQuestions = [],
     isPending: isLoadingQuestions,
     isError,
   } = useQuizQuestions({ category, difficulty });
+
+  useEffect(() => {
+    if (isError) localStorage.removeItem("activeQuizUrl");
+  }, [isError]);
 
   useEffect(() => {
     localStorage.setItem("quizTimeLeft", timeLeft);
@@ -98,6 +131,7 @@ function QuizScreen() {
   }, [timeLeft]);
 
   const handleSubmit = () => {
+    localStorage.removeItem("activeQuizUrl");
     let correctAnswers = 0;
     let incorrectAnswers = 0;
     const results = [];
@@ -149,6 +183,10 @@ function QuizScreen() {
       [currentQuestionIndex]: option,
     }));
   };
+  if (!VALID_CATEGORIES.includes(category) || !VALID_DIFFICULTIES.includes(difficulty)) {
+    localStorage.removeItem("activeQuizUrl");
+    return <Navigate to="/dashboard" replace />;
+  }
   if (isLoadingQuestions) return <SplashScreen />;
   if (isError) return <p>Failed to load questions. Please try again.</p>;
 
@@ -158,7 +196,7 @@ function QuizScreen() {
     <StyledQuizScreen>
       <QuizContainer>
         <QuizTitle>
-          <p>Science Quiz</p>
+          <p>{category} Quiz</p>
           <span>00:{formatTime(timeLeft)}</span>
         </QuizTitle>
         <QuestionComponent

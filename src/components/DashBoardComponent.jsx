@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 const ComponentCOn = styled.div`
@@ -60,8 +60,6 @@ const StyledImage = styled(LazyLoadImage)`
 function DashBoardComponent({ image, text, category, borderColor }) {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const handClick = () => {
     navigate(`/dashboard/${category}`);
   };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useNavigate, useParams, useSearchParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 
 const ComponentCOn = styled.div`
@@ -56,7 +56,6 @@ function DifficultyOptionsCard({ image, text, difficulty, bgColor }) {
   const navigate = useNavigate();
   const { category } = useParams();
   const handleDifficultySelect = (difficulty) => {
-    console.log(difficulty);
     navigate(`/quiz/${category}/${difficulty}`);
   };
   return (

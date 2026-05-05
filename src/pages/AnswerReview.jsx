@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import QuestionComponent from "../components/QuestionComponent";
 import AnswerReveiwCard from "../components/AnswerReviewComponent";
-import { useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router";
 
 const Container = styled.div`
   display: flex;
@@ -57,6 +57,9 @@ const AnswerContainer = styled.div`
 function AnswerReview() {
   const location = useLocation();
   const { results, filteredQuestions } = location.state || {};
+
+  if (!location.state) return <Navigate to="/dashboard" replace />;
+
   return (
     <Container>
       <ReviewContainer>
@@ -68,7 +71,7 @@ function AnswerReview() {
 
           <div>
             {filteredQuestions?.map((question, index) => {
-              const userAnswer = results[index]?.userAnswer;
+              const userAnswer = results?.[index]?.userAnswer;
               return (
                 <ResultDiv key={index}>
                   <span>{index + 1}</span>
