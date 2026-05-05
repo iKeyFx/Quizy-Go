@@ -307,14 +307,10 @@ function HeaderUser() {
 
         <StyledDeskUl>
           <li>
-            <NavLink to="/dashboard">Leaderboard</NavLink>
+            <NavLink to="/leaderboard">Leaderboard</NavLink>
           </li>
-          <li>
-            <NavLink to="/dashboard">Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Setting</NavLink>
-          </li>
+          <li>Profile</li>
+          <li>Setting</li>
         </StyledDeskUl>
 
         <StyledButtonDiv>
@@ -335,18 +331,11 @@ function HeaderUser() {
       <DropdownMenu open={openMenu}>
         <ul>
           <li>
-            <NavLink to="/dashboard">Leaderboard</NavLink>
+            <NavLink to="/leaderboard">Leaderboard</NavLink>
           </li>
-          <li>
-            <NavLink to="/dashboard">Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Setting</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/dashboard">Help & Support</NavLink>
-          </li>
+          <li>Profile</li>
+          <li>Setting</li>
+          <li>Help & Support</li>
           <li>
             <StyledButton onClick={handleLogoutClick}>Log Out</StyledButton>
           </li>

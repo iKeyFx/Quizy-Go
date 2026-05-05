@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ProgressiveBar from "../../ui/ProgressiveBar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../../ui/Button";
 import QuestionComponent from "../../components/QuestionComponent";
 import { useQuizQuestions } from "./useQuizQuestions";
@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 import { formatTime } from "../../util/FormatTime";
 import SplashScreen from "../../ui/SplashScreen";
 import { VALID_CATEGORIES, VALID_DIFFICULTIES } from "../../data/constants";
+import { useUser } from "../authentication/useUser";
+import useSubmitScore from "./useSubmitScore";
 
 const StyledQuizScreen = styled.div`
   display: flex;
@@ -58,6 +60,9 @@ const StyleedButtonDiv = styled.div`
 `;
 function QuizScreen() {
   const { category, difficulty } = useParams();
+  const { user } = useUser();
+  const { submitScore } = useSubmitScore();
+  const hasSubmitted = useRef(false);
   const [timeLeft, setTimeLeft] = useState(() => {
     const savedTime = localStorage.getItem("quizTimeLeft");
     return savedTime ? parseInt(savedTime, 10) : 600;
@@ -131,6 +136,9 @@ function QuizScreen() {
   }, [timeLeft]);
 
   const handleSubmit = () => {
+    if (hasSubmitted.current) return;
+    hasSubmitted.current = true;
+
     localStorage.removeItem("activeQuizUrl");
     let correctAnswers = 0;
     let incorrectAnswers = 0;
@@ -156,6 +164,18 @@ function QuizScreen() {
 
     localStorage.removeItem("quizTimeLeft");
     localStorage.removeItem("quizAnswers");
+
+    if (user) {
+      submitScore({
+        userId: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        category,
+        difficulty,
+        score: correctAnswers,
+        timeTaken: 600 - timeLeft,
+      });
+    }
 
     navigate(`/quiz/${category}/${difficulty}/result`, {
       state: {
@@ -189,6 +209,7 @@ function QuizScreen() {
   }
   if (isLoadingQuestions) return <SplashScreen />;
   if (isError) return <p>Failed to load questions. Please try again.</p>;
+  if (filteredQuestions.length === 0) return <Navigate to="/dashboard" replace />;
 
   const progress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
 

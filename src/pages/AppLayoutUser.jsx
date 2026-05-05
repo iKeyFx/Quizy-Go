@@ -18,19 +18,12 @@ function AppLayoutUser() {
 
   const activeQuizUrl = localStorage.getItem("activeQuizUrl");
   if (activeQuizUrl && location.pathname !== activeQuizUrl) {
-    // Validate the stored URL before redirecting
-    const quizUrlPattern = /^\/quiz\/([^/]+)\/([^/]+)$/;
-    const match = activeQuizUrl.match(quizUrlPattern);
-
-    if (match) {
-      const [, category, difficulty] = match;
-      // Check if category and difficulty are valid
-      if (VALID_CATEGORIES.includes(category) && VALID_DIFFICULTIES.includes(difficulty)) {
-        return <Navigate to={activeQuizUrl} replace />;
-      }
-    }
-
-    // If validation fails, clear the stale value
+    const match = activeQuizUrl.match(/^\/quiz\/([^/]+)\/([^/]+)$/);
+    const isValid =
+      match &&
+      VALID_CATEGORIES.includes(decodeURIComponent(match[1])) &&
+      VALID_DIFFICULTIES.includes(decodeURIComponent(match[2]));
+    if (isValid) return <Navigate to={activeQuizUrl} replace />;
     localStorage.removeItem("activeQuizUrl");
   }
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Footer from "../ui/Footer";
 import Header from "../ui/Header";
-import { Navigate, useLocation } from "react-router";
+import { Navigate } from "react-router";
 import { VALID_CATEGORIES, VALID_DIFFICULTIES } from "../data/constants";
 
 const StyledPage = styled.div`
@@ -35,27 +35,13 @@ const StyledMain = styled.main`
 function PageNotFound() {
   const location = useLocation();
   const activeQuizUrl = localStorage.getItem("activeQuizUrl");
-
   if (activeQuizUrl) {
-    // Validate before redirecting to prevent loops
-    // 1. Ensure it starts with '/' (safe app path)
-    // 2. Ensure it matches the quiz URL pattern
-    // 3. Validate category and difficulty
-    // 4. Ensure it's not equal to current location (avoid redirect-to-self)
-
-    if (activeQuizUrl.startsWith('/') && activeQuizUrl !== location.pathname) {
-      const quizUrlPattern = /^\/quiz\/([^/]+)\/([^/]+)$/;
-      const match = activeQuizUrl.match(quizUrlPattern);
-
-      if (match) {
-        const [, category, difficulty] = match;
-        if (VALID_CATEGORIES.includes(category) && VALID_DIFFICULTIES.includes(difficulty)) {
-          return <Navigate to={activeQuizUrl} replace />;
-        }
-      }
-    }
-
-    // If any validation fails, clear the stale value
+    const match = activeQuizUrl.match(/^\/quiz\/([^/]+)\/([^/]+)$/);
+    const isValid =
+      match &&
+      VALID_CATEGORIES.includes(decodeURIComponent(match[1])) &&
+      VALID_DIFFICULTIES.includes(decodeURIComponent(match[2]));
+    if (isValid) return <Navigate to={activeQuizUrl} replace />;
     localStorage.removeItem("activeQuizUrl");
   }
 

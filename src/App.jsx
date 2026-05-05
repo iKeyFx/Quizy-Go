@@ -18,6 +18,7 @@ import { Toaster } from "react-hot-toast";
 import About from "./ui/About";
 import Home from "./ui/Home";
 import FeaturesPage from "./ui/FeaturesPage";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   const queryClient = new QueryClient({
@@ -74,6 +75,7 @@ function App() {
                 element={<ScoreDisplay />}
               />
               <Route path="quiz/answer-review" element={<AnswerReview />} />
+              <Route path="leaderboard" element={<Leaderboard />} />
             </Route>
           </Routes>
         </BrowserRouter>
