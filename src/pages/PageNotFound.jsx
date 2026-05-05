@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Footer from "../ui/Footer";
 import Header from "../ui/Header";
 import { Navigate } from "react-router";
+import { VALID_CATEGORIES, VALID_DIFFICULTIES } from "../data/constants";
 
 const StyledPage = styled.div`
   min-height: 100vh;
@@ -33,7 +34,15 @@ const StyledMain = styled.main`
 
 function PageNotFound() {
   const activeQuizUrl = localStorage.getItem("activeQuizUrl");
-  if (activeQuizUrl) return <Navigate to={activeQuizUrl} replace />;
+  if (activeQuizUrl) {
+    const match = activeQuizUrl.match(/^\/quiz\/([^/]+)\/([^/]+)$/);
+    const isValid =
+      match &&
+      VALID_CATEGORIES.includes(decodeURIComponent(match[1])) &&
+      VALID_DIFFICULTIES.includes(decodeURIComponent(match[2]));
+    if (isValid) return <Navigate to={activeQuizUrl} replace />;
+    localStorage.removeItem("activeQuizUrl");
+  }
 
   return (
     <StyledPage>
