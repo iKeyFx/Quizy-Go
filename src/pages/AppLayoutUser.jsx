@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Dashboard from "./Dashboard";
 import HeaderUser from "../ui/HeaderUser";
-import { Outlet } from "react-router";
+import { Navigate, Outlet, useLocation } from "react-router";
 
 const StyledAppMain = styled.main`
   padding: 3rem 5rem;
@@ -12,9 +12,17 @@ const StyledAppMain = styled.main`
   }
 `;
 function AppLayoutUser() {
+  const location = useLocation();
+  const isQuizActive = /^\/quiz\/[^/]+\/[^/]+$/.test(location.pathname);
+
+  const activeQuizUrl = localStorage.getItem("activeQuizUrl");
+  if (activeQuizUrl && location.pathname !== activeQuizUrl) {
+    return <Navigate to={activeQuizUrl} replace />;
+  }
+
   return (
     <div>
-      <HeaderUser />
+      {!isQuizActive && <HeaderUser />}
       <StyledAppMain>
         <Outlet />
       </StyledAppMain>

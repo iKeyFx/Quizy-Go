@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import { IoCloseSharp, IoShareSocialOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { StyledButton } from "./ResultButton";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 
 const Overlay = styled.div`
   /* background-color: rgba(0, 0, 0, 0.5);
@@ -129,9 +129,7 @@ function ScoreDisplay() {
   const { category } = useParams();
   const { correctAnswers, incorrectAnswers, results } = location.state || {};
 
-  if (!location.state) {
-    return <p>No results found. Please complete the quiz first.</p>;
-  }
+  if (!location.state) return <Navigate to="/dashboard" replace />;
 
   return createPortal(
     <Overlay>
@@ -140,11 +138,11 @@ function ScoreDisplay() {
           <IoCloseSharp onClick={() => navigate("/dashboard")} />
         </Button>
         <StyledH3>Congratulations</StyledH3>
-        <StyledCategorySpan>Categoty: {category}</StyledCategorySpan>
+        <StyledCategorySpan>Category: {category}</StyledCategorySpan>
         <StyledAnswerDiv>
           <p>You answered</p>
           <span>
-            {correctAnswers}/{results.length}
+            {correctAnswers}/{results?.length ?? 0}
           </span>
           <p>Question Correct</p>
         </StyledAnswerDiv>

@@ -15,11 +15,11 @@ function useSignup() {
 
     onSuccess: (data) => {
       navigate("/login", { replace: true });
-      toast.success("Account Sucessfully Created, Log in Now!");
+      toast.success("Account Successfully Created, Log in Now!");
     },
 
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
       toast.error("Unable to sign up, Check your input again");
     },
   });

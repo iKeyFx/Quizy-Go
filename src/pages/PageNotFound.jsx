@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Footer from "../ui/Footer";
 import Header from "../ui/Header";
+import { Navigate } from "react-router";
 
 const StyledPage = styled.div`
   min-height: 100vh;
@@ -31,6 +32,9 @@ const StyledMain = styled.main`
 `;
 
 function PageNotFound() {
+  const activeQuizUrl = localStorage.getItem("activeQuizUrl");
+  if (activeQuizUrl) return <Navigate to={activeQuizUrl} replace />;
+
   return (
     <StyledPage>
       <Header />

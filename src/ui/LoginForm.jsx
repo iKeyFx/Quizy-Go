@@ -118,7 +118,7 @@ function LoginForm({ loginAPi, isPending }) {
           placeholder="(e.g johnssma@gmail.com)"
         />
         {errors?.email?.message && (
-          <StyledErrorSpan>incorrect email or phone</StyledErrorSpan>
+          <StyledErrorSpan>{errors.email.message}</StyledErrorSpan>
         )}
       </div>
       <div>
@@ -141,7 +141,7 @@ function LoginForm({ loginAPi, isPending }) {
             {visible ? <FaRegEye /> : <FaRegEyeSlash />}
           </StyledEyeImage>
           {errors?.password?.message && (
-            <StyledErrorSpan>incorrect email or phone</StyledErrorSpan>
+            <StyledErrorSpan>{errors.password.message}</StyledErrorSpan>
           )}
         </StyledPasswordDiv>
         <StyledFGPassword>Forget password?</StyledFGPassword>

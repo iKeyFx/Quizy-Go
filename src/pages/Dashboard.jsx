@@ -62,16 +62,17 @@ export const CardConDiv = styled.div`
 `;
 function Dashboard() {
   const { user, isPending, isError } = useUser();
-  const { firstName, lastName } = user;
-  // console.log(user);
+
   if (isPending) return <SplashScreen />;
+
+  const { firstName, lastName } = user;
   // if (isError) return <PageNotFound />;
 
   return (
     <StyledDashBoard>
       <StyledWelcomeDiv>
         <UserAvatar src={userAvatar} alt="user avatar" />
-        <h2>{isPending ? "Welcome" : `Welcome, ${firstName} ${lastName}`}</h2>
+        <h2>Welcome, {firstName} {lastName}</h2>
       </StyledWelcomeDiv>
       <CardConDiv>
         <DashBoardComponent

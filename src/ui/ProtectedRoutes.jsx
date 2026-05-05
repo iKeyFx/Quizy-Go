@@ -13,6 +13,9 @@ function ProtectedRoute({ children }) {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("quizTimeLeft");
+    localStorage.removeItem("quizAnswers");
+    localStorage.removeItem("activeQuizUrl");
     queryClient.clear();
     navigate("/login", { replace: true });
   };

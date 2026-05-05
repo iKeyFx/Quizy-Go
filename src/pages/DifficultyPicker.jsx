@@ -6,6 +6,8 @@ import MediumImage from "../asset/Medium.png";
 import HardImage from "../asset/Hard.png";
 import { ArrowBack, StyledArrowBack } from "../features/authentication/Login";
 import { useMoveBack } from "../hooks/useMoveBack";
+import { Navigate, useParams } from "react-router";
+import { VALID_CATEGORIES } from "../data/constants";
 
 const StyledHeader = styled(StyledWelcomeDiv)`
   background-color: var(--color-white);
@@ -23,7 +25,12 @@ const ArrowBackPage = styled(StyledArrowBack)`
   left: 0;
 `;
 function DifficultyPicker() {
+  const { category } = useParams();
   const moveBack = useMoveBack();
+
+  if (!VALID_CATEGORIES.includes(category)) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <StyledDPicker>
