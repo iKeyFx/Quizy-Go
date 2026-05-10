@@ -9,9 +9,13 @@ export function useUser() {
     queryKey: ["user"],
 
     initialData: () => {
-      // Get user data from localStorage
-      const userData = localStorage.getItem("user");
-      return userData ? JSON.parse(userData) : null;
+      try {
+        const raw = localStorage.getItem("user");
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        localStorage.removeItem("user");
+        return null;
+      }
     },
   });
 

@@ -13,7 +13,7 @@ function useLogout() {
       return;
     }
     localStorage.removeItem("user");
-    queryClient.removeQueries(["user"]);
+    queryClient.removeQueries({ queryKey: ["user"] });
     navigate("/login", { replace: true });
   };
 
