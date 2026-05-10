@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
-import useSignup from "./useSignup";
 import SpinnerMini from "../../ui/SpinnerMini";
 
 const StyledForm = styled.form`
@@ -83,16 +82,24 @@ const StyledErrorSpan = styled.span`
 `;
 function SignUpForm({ userSignUp, isError, isPending }) {
   const [visible, setVisible] = useState(false);
-  const { register, formState, handleSubmit, reset, getValues } = useForm();
+  const { register, formState, handleSubmit, reset, getValues, setError } = useForm();
   const { errors } = formState;
 
   const handleClick = () => {
     setVisible((prev) => !prev);
   };
 
-  const handleSignUp = ({ email, password, fname, lname, confirmPassword }) => {
-    userSignUp({ email, password, fname, lname, confirmPassword });
-    // reset();
+  const handleSignUp = (data) => {
+    userSignUp(data, {
+      onError: (error) => {
+        if (/already|registered|in use/i.test(error.message)) {
+          setError('email', {
+            type: 'server',
+            message: 'This email address is already registered.',
+          })
+        }
+      },
+    })
   };
   return (
     <StyledForm onSubmit={handleSubmit(handleSignUp)}>

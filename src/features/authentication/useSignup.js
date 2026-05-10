@@ -19,8 +19,8 @@ function useSignup() {
     },
 
     onError: (error) => {
-      // console.log(error);
-      toast.error("Unable to sign up, Check your input again");
+      if (/already|registered|in use/i.test(error.message)) return
+      toast.error(error.message)
     },
   });
 
